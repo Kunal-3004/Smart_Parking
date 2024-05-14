@@ -21,9 +21,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
 
-class SignUpActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity(),SwipeListener {
     private lateinit var binding: ActivitySignupBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var swipeGestureDetector: SwipeGestureDetector
 
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -37,6 +38,9 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = Firebase.auth
+
+        swipeGestureDetector= SwipeGestureDetector(this,this)
+        swipeGestureDetector.setOnTouchListener(binding.SignSwipe)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.google_sign_in_client_id))
@@ -150,6 +154,11 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
     }
-
-
+    override fun onSwipeRight() {
+        val intent = Intent(this, Splash4::class.java)
+        startActivity(intent)
+        finish()
+    }
+    override fun onSwipeLeft() {
+    }
 }
