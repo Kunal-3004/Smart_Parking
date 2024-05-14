@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                 auth.signInWithEmailAndPassword(email,password).addOnCompleteListener {
                     if(it.isSuccessful){
                         Toast.makeText(this,"Successfully Login", Toast.LENGTH_SHORT).show()
-                        val intent= Intent(this,MainActivity::class.java)
+                        val intent= Intent(this,map::class.java)
                         startActivity(intent)
                         finish()
                     }
@@ -114,15 +114,12 @@ class LoginActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
-                // Google Sign In failed
                 Log.w(TAG, "Google sign in failed", e)
                 Toast.makeText(this, "Google sign in failed", Toast.LENGTH_SHORT).show()
             }

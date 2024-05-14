@@ -56,6 +56,9 @@ dependencies {
 
     implementation ("com.google.android.gms:play-services-auth:21.1.1")
 
+    implementation ("com.google.android.gms:play-services-maps:18.2.0")
+
+
 
 
 }

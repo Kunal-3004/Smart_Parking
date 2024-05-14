@@ -71,7 +71,7 @@ class SignUpActivity : AppCompatActivity(),SwipeListener {
                 auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener{
                     if(it.isSuccessful){
                         Toast.makeText(this,"Account created successfully!", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this,MainActivity::class.java)
+                        val intent = Intent(this,map::class.java)
                         startActivity(intent)
                         finish()
                     }
@@ -142,7 +142,7 @@ class SignUpActivity : AppCompatActivity(),SwipeListener {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, map::class.java)
                     startActivity(intent)
                     finish()
                     Log.d(TAG, "signInWithCredential:success")
